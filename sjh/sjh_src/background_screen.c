@@ -1,6 +1,5 @@
-#include <stdio.h>
 
-void main()
+void background_screen()
 {
 	char game_screen[22][28];
 
@@ -9,7 +8,6 @@ void main()
                 for(int z=0; z<28; z++)
                 {
                         game_screen[i][z]=32;
-			//tan - 9
                 }
         }
 
