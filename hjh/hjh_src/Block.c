@@ -1,7 +1,20 @@
+/*Header*/
 #include <stdio.h>
+#include <stdlib.h> // system("clear")
+#include <termios.h> // tcgetattr()
+#include <unistd.h>
+#include <string.h>
 
+/*Macro*/
+#define UP 73
+#define CCHAR 0
 
+/*Function*/
+void Init_block(void);
+void Block_rotate(int state);
+int getch(void);
 
+/*Global Variable*/
 char i_block[4][4][4] = 
 
 { 
@@ -114,151 +127,66 @@ char o_block[4][4][4] =
    // **
 
 
+
 int main()
 {
-	for(int k=0;k<4;k++)
+	char key;
+	int state=0;
+	key = getch();
+	Init_block();
+	while(1)
 	{
-		for(int i=0;i<4;i++)
+		if(key == UP)
 		{
-			for(int j=0;j<4;j++)
-			{
-				if(i_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
+			system("clear");
+			state=++state%4;
+			Block_rotate(state);
 		}
-		printf("\n");
-	}
-	
-
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(t_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(s_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(z_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-
-	
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(l_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(j_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
-	}
-
-
-	for(int k=0;k<4;k++)
-	{
-		for(int i=0;i<4;i++)
-		{
-			for(int j=0;j<4;j++)
-			{
-				if(o_block[k][i][j] == 1)
-				{
-					printf("%c",'#');
-				}
-				else
-				{
-					printf(" ");
-				}
-			}
-			printf("\n");
-		}
-		printf("\n");
 	}
 	return 0;
+}
+
+void Init_block(void)
+{
+	for(int j=0;j<4;j++)
+	{
+		for(int i=0;i<4;i++)
+		{
+			if(i_block[0][i][j] == 1)
+			{
+				printf("%c",'#');
+			}
+			else
+			{
+				printf(" ");
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	return;
+	
+}
+
+void Block_rotate(int state)
+{
+	for(int j=0;j<4;j++)
+	{
+		for(int i=0;i<4;i++)
+		{
+			if(i_block[state][i][j] == 1)
+			{
+				printf("%c",'#');
+			}
+			else
+			{
+				printf(" ");
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	return;
 }
 
 
