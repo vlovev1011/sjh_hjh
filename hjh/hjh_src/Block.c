@@ -3,14 +3,16 @@
 #include <stdlib.h> // system("clear")
 #include <termios.h> // tcgetattr()
 #include <unistd.h>
-#include <string.h>
+
+#include "getch.h"
 
 /*Macro*/
-#define UP 73
+#define UP_1 73
+#define UP_2 105
 #define CCHAR 0
 
 /*Function*/
-void Init_block(void);
+void Start_block(void);
 void Block_rotate(int state);
 int getch(void);
 
@@ -132,21 +134,24 @@ int main()
 {
 	char key;
 	int state=0;
-	key = getch();
-	Init_block();
+	Start_block();
+	
+	
 	while(1)
 	{
-		if(key == UP)
+		key = getch();
+		if(key == UP_1 || key == UP_2)
 		{
 			system("clear");
 			state=++state%4;
 			Block_rotate(state);
 		}
+		key=0;
 	}
 	return 0;
 }
 
-void Init_block(void)
+void Start_block(void)
 {
 	for(int j=0;j<4;j++)
 	{

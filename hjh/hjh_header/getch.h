@@ -1,10 +1,13 @@
 #include <stdio.h>
-#include <termio.h>
+#include <termios.h>
+#include <unistd.h>
 
-int getch(void)
+int getch()
 {
 	int ch;
-	struct termios buf,save;
+	struct termios buf;
+	struct termios save;
+
 	tcgetattr(0,&save);
 	buf = save;
 	buf.c_lflag &= ~(ICANON|ECHO);
@@ -12,6 +15,7 @@ int getch(void)
 	buf.c_cc[VTIME] = 0;
 	tcsetattr(0,TCSAFLUSH,&buf);
 	ch = getchar();
-	tcsetattr(0, TCSAFLUSH, &save);
+	tcsetattr(0,TCSAFLUSH,&save);
 	return ch;
 }
+
