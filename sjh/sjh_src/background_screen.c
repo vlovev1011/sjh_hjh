@@ -1,8 +1,8 @@
 #include "background_screen.h"
 
-void background_screen()
+void background_screen(int speed, int delete_line)
 {
-	system("clear");
+
 	char game_screen[21][10];
 
 	for(int i=0; i<21; i++)
@@ -22,6 +22,11 @@ void background_screen()
 	{
 		game_screen[20][i]='@';
 	}
+	system("clear");
+
+	printf("current level : %d\n",speed);
+	printf("delete_line : %d\n",delete_line);
+
 	for(int i=0; i<21; i++)
 	{
 		for(int z=0; z<10; z++)
