@@ -5,6 +5,8 @@
 #include "var.h"
 
 
+void display_tetris();
+
 void main()
 {
 	//int( * tetris_table)[21][10];
@@ -16,7 +18,7 @@ void main()
 
 
 	background_screen(speed,delete_line);
-	//display_tetris();
+	display_tetris();
 	delete_line = line_clear();
 	speed=level_up_check(speed,delete_line);
 	
