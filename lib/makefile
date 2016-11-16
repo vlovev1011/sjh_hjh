@@ -1,1 +1,0 @@
-libfunc.a : 
