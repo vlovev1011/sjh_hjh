@@ -1,8 +1,15 @@
 /*Header*/
 #include <stdio.h>
-#include <stdlib.h> // system("clear")
+#include <stdlib.h> // system("clear") , srand
 #include <termios.h> // tcgetattr()
 #include <unistd.h>
+#include <sys/time.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <time.h>
+#include <signal.h>
+#include <string.h>
+
 
 #include "getch.h"
 
@@ -23,9 +30,12 @@
 #define O_BLOCK 6
 
 /*Function*/
+int Key_input(void);
+int Block_move(int command);
 void Start_block(void);
 void Block_rotate();
 int getch(void);
+int Game_start(void);
 
 /*Global Variable*/
 char i_block[4][4][4] = 
@@ -141,7 +151,7 @@ char o_block[4][4][4] =
 int x = 3; // Block -> x
 int y = 0; // Block -> y
 int block_state; // block rotate state
-
+int block_num;
 
 int main()
 {
@@ -152,9 +162,54 @@ int main()
 	
 	while(1)
 	{
-		Key_input()
+		Game_start();
 	}
 	return 0;
+}
+
+int Game_start(void)
+{
+	static struct sigaction sa;
+	static struct itimerval timer;
+	time_t ptime;
+	struct tm *t;
+
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = &refresh;
+	sigaction(SIGVTALRM,&sa,NULL);
+
+	timer.it_value.tv_sec=0;
+	timer.it_value.tv_usec = 1;
+
+	timer.ti_interval.tv_sec=0;
+	timer.it_interval.tv_usec = 1;
+
+	setitimer(ITIMER_VIRTUAL, &timer, NULL);
+
+	
+}
+
+int refresh(int signum)
+{
+	static int downcount = 0;
+	static int setcount =0;
+	static long speedcount = 0;
+	static int countrange = 5;
+	static int firststart = 0;
+
+	srand((unsigned)time(NULL));
+
+	if(firststart == 0)
+	{
+		block_num = rand()%7;
+		firststart++;
+	}
+
+	key_input();
+	
+	
+
+	
 }
 
 int Key_input()
@@ -190,6 +245,7 @@ int Block_move(int command)
 {
 	int newx = x;
 	int newy = y;
+	
 
 	switch(command)
 	{
@@ -202,6 +258,7 @@ int Block_move(int command)
 		case UP : block_state = ++block_state%4;
 			break;
 	}
+	return 0;
 }
 
 void Start_block(void)
