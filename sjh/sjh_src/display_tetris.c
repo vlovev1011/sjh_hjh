@@ -1,6 +1,5 @@
-#include "var.h"
 #include "display_tetris.h"
-
+#include "variable.h"
 
 
 void display_tetris(void)

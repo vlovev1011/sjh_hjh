@@ -1,5 +1,21 @@
 #include "background_screen.h"
-#include "var.h"
+#include "variable.h"
+
+char i_block[4][4][4];
+char t_block[4][4][4];
+char s_block[4][4][4];
+char z_block[4][4][4];
+char l_block[4][4][4];
+char j_block[4][4][4];
+
+extern int x; // Block -> x
+extern int y; // Block -> y
+extern int block_state; // block rotate state
+extern int block_number;
+extern int next_block_number;
+extern long point;
+
+
 
 char tetris_table[21][10];
 

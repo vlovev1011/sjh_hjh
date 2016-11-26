@@ -1,5 +1,7 @@
 /*Global Variable*/
-char i_block[4][4][4] = 
+#pragma once
+
+/*extern char i_block[4][4][4] = 
 
 { 
 
@@ -15,7 +17,7 @@ char i_block[4][4][4] =
 
    
 
-char t_block[4][4][4] = 
+/*extern char t_block[4][4][4] = 
 
 { 
 
@@ -29,9 +31,9 @@ char t_block[4][4][4] =
 
 }; // ***  
    //  *
-   
+ 
 
-char s_block[4][4][4] = 
+extern char s_block[4][4][4] = 
 
 { 
 
@@ -47,7 +49,7 @@ char s_block[4][4][4] =
    // **
    //  *
 
-char z_block[4][4][4] = 
+extern char z_block[4][4][4] = 
 
 { 
 
@@ -63,7 +65,7 @@ char z_block[4][4][4] =
    // ** 
    // *
 
-char l_block[4][4][4] = 
+extern char l_block[4][4][4] = 
 
 { 
 
@@ -79,7 +81,7 @@ char l_block[4][4][4] =
    // *
    // **
 
-char j_block[4][4][4] = 
+extern char j_block[4][4][4] = 
 
 { 
 
@@ -95,7 +97,7 @@ char j_block[4][4][4] =
    //  *
    // **
 
-char o_block[4][4][4] = 
+extern char o_block[4][4][4] = 
 
 { 
 
@@ -109,11 +111,12 @@ char o_block[4][4][4] =
 
 }; // ** 
    // **
-char tetris_table[21][10];
+*/
+extern char tetris_table[21][10];
 
-int x = 3; // Block -> x
-int y = 0; // Block -> y
-int block_state; // block rotate state
-int block_number = 0;
-int next_block_number = 0;
-long point=0;
+//extern int x = 3; // Block -> x
+//extern int y = 0; // Block -> y
+extern int block_state; // block rotate state
+//extern int block_number = 0;
+//extern int next_block_number = 0;
+//extern long point=0;

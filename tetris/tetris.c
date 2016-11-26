@@ -2,10 +2,8 @@
 #include "background_screen.h"
 #include "level_up_check.h"
 #include "line_clear.h"
-#include "var.h"
-
-
-void display_tetris();
+#include "display_tetris.h"
+#include "variable.h"
 
 void main()
 {
