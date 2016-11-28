@@ -13,7 +13,7 @@
 #define J_BLOCK 5
 #define O_BLOCK 6
 
-
+int collision(int command);
 
 
 
