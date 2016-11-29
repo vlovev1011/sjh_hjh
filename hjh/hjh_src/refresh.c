@@ -1,6 +1,4 @@
-#include "refresh.h"
 #include "variable.h"
-#include "collision.h"
 #include "getch.h"
 
 int refresh(int signum)
