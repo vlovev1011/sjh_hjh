@@ -10,7 +10,8 @@ void main()
 	//int( * tetris_table)[21][10];
 	static int speed;
 	static int delete_line=0;
-	speed = start_screen();
+	speed =5;
+	start_screen();
 
 
 

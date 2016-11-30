@@ -7,12 +7,15 @@
 
 int start_screen()
 {
-	system("clear");
-        int speed;
+	int menu;
+        system("clear");
         printf("************Tetris*************\n");
-        printf("Speed Level (1~10) : ");
-        scanf("%d",&speed);
-        return speed;
+        printf("\n\n\n\n\n");
+        printf("***********************\n");
+        printf("1. game_start\n");
+        printf("2. game_end\n");
+        printf("***********************\n");
+        printf("select menu : ");
+	scanf("%d",&menu);
 }
-
 
