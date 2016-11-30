@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-int level_up_check(int speed,int delete_line);
+void level_up_check(void);
 
 

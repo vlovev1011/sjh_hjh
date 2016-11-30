@@ -1,14 +1,12 @@
- #include "level_up_check.h"
+#include "level_up_check.h"
+#include "variable.h"
 
-
- int level_up_check(int speed, int delete_line)
- {
+void level_up_check(void)
+{
  	int temp = delete_line%3;
- 	int new_speed=speed;
  	if(delete_line != 0 || temp==0)
  	{
- 		new_speed=speed+1;
+ 		countrange++;
 	}
- 	return new_speed;
- }
+}
 

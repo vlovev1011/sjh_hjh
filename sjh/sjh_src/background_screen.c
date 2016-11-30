@@ -2,10 +2,9 @@
 #include "variable.h"
 
 
-char tetris_table[21][10];
 
 
-void background_screen(int speed, int delete_line)
+void background_screen(void)
 {
  	for(int i=0; i<21; i++)
  	{
@@ -28,7 +27,7 @@ void background_screen(int speed, int delete_line)
  	system("clear");
 
 
- 	printf("current level : %d\n",speed);
+ 	printf("current level : %d\n",countrange);
  	printf("delete_line : %d\n",delete_line);
 
 

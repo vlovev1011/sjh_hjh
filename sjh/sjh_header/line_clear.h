@@ -2,5 +2,4 @@
 
 #include <stdio.h>
 
-
-int line_clear(void);
+void line_clear(void);

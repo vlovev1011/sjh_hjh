@@ -62,7 +62,8 @@ extern int block_state; // block rotate state
 extern int block_number;
 extern int next_block_number;
 extern long point;
-
+extern int countrange;
+extern int delete_line;
 int refresh(int signum);
 int collision(int command);
 void block_init(void);

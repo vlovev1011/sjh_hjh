@@ -6,13 +6,13 @@ int refresh(int signum)
 	static int downcount=0;
 	static int setcount=0;
 	static long speedcount=0;
-	static int countrange=5;
+	//static int countrange=5;
 	static int firststart=0;
 
 	char ch;
 
 	srand((unsigned)time(NULL));
-
+	countrange=5;
 	if(firststat == 0)
 	{
 		block_number=rand()%7;

@@ -5,20 +5,24 @@
 #include "display_tetris.h"
 #include "variable.h"
 
+int countrange;
+int delete_line;
+char tetris_table[21][10];
+
 void main()
 {
 	//int( * tetris_table)[21][10];
-	static int speed;
-	static int delete_line=0;
-	speed =5;
-	start_screen();
+	//static int speed;
+	delete_line=0;
+	countrange=5;
+        start_screen();
 
 
 
 
-	background_screen(speed,delete_line);
+	background_screen();
 	display_tetris();
-	delete_line = line_clear();
-	speed=level_up_check(speed,delete_line);
+	line_clear();
+	level_up_check();
 	
 }
