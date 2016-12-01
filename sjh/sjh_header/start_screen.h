@@ -5,7 +5,7 @@
 
 
 
-int start_screen()
+int start_screen(void)
 {
 	int menu;
         system("clear");
@@ -17,5 +17,6 @@ int start_screen()
         printf("***********************\n");
         printf("select menu : ");
 	scanf("%d",&menu);
+	return menu;
 }
 

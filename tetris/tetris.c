@@ -11,18 +11,23 @@ char tetris_table[21][10];
 
 void main()
 {
-	//int( * tetris_table)[21][10];
-	//static int speed;
+	int GAME_START;
+
 	delete_line=0;
 	countrange=5;
-        start_screen();
+	GAME_START = start_screen();
 
 
+	while(GAME_START==1)
+	{
+		background_screen();
+		display_tetris();
+		line_clear();
+		level_up_check();
+	}
+	if(GAME_START == 2)
+	{
+		return;
+	}
 
-
-	background_screen();
-	display_tetris();
-	line_clear();
-	level_up_check();
-	
 }
