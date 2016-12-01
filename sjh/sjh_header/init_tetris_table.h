@@ -1,8 +1,5 @@
 #pragma once
 
-
 #include <stdio.h>
 
-void level_up_check(void);
-
-
+void init_tetris_table(void);
