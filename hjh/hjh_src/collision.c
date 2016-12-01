@@ -1,5 +1,5 @@
 /*whether block can move or rotate*/
-
+#include "source.h"
 #include "variable.h"
 
 int collision(int command)

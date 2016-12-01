@@ -1,8 +1,9 @@
+#include "source.h"
 #include "variable.h"
 
 void block_init()
 {
-	extern char i_block[4][4][4] =
+	char i_block[4][4][4] =
 	{
 	        1, 1, 1, 1,    0, 0, 0, 0,    0, 0, 0, 0,    0,0,0,0,
 
@@ -13,7 +14,7 @@ void block_init()
         	1, 0, 0, 0,   1, 0, 0, 0,    1, 0, 0, 0,    1,0,0,0
 
 	}; // ****
-	extern char t_block[4][4][4] =
+	char t_block[4][4][4] =
 	{
 
         	1, 0, 0, 0,   1, 1, 0, 0,    1, 0, 0, 0,   0, 0, 0, 0,
@@ -26,7 +27,7 @@ void block_init()
 
 	}; // ***
 	   //  *
-	extern char s_block[4][4][4] =
+	char s_block[4][4][4] =
 	{
 
 	        1, 0, 0, 0,    1, 1, 0, 0,    0, 1, 0, 0,   0, 0, 0, 0,
@@ -40,7 +41,7 @@ void block_init()
 	}; // *
 	   // **
 	   //  *
-	extern char z_block[4][4][4] =
+	char z_block[4][4][4] =
 	{
 
         	0, 1, 0, 0,    1, 1, 0, 0,   1, 0, 0, 0,    0, 0,0, 0,
@@ -54,7 +55,7 @@ void block_init()
 	}; //  *
 	   // **
  	   // *
-	extern char l_block[4][4][4] =
+	char l_block[4][4][4] =
 	{
 
 		1, 0, 0, 0,    1, 0, 0, 0,    1, 1, 0, 0,   0, 0, 0, 0,
@@ -68,7 +69,7 @@ void block_init()
 	}; // *
   	 // *
   	 // **
-	extern char j_block[4][4][4] =
+	char j_block[4][4][4] =
 	{
 
         	0, 1, 0, 0,    0, 1, 0, 0,    1, 1, 0, 0,     0, 0, 0, 0,
@@ -82,7 +83,7 @@ void block_init()
 	}; //  *
 	   //  *
 	   // **
-	extern char o_block[4][4][4] =
+	char o_block[4][4][4] =
 	{
 
 	        1, 1, 0, 0,    1, 1, 0, 0,    0, 0, 0, 0,    0, 0, 0, 0,
@@ -96,12 +97,12 @@ void block_init()
 	}; // **
 	   // **
 
-	extern char tetris_table[21][10];
-	extern int x = 3; // Block -> x
-	extern int y = 0; // Block -> y
-	extern int block_state; // block rotate state
-	extern int block_number = 0;
-	extern int next_block_number = 0;
-	extern long point=0;
+	char tetris_table[21][10];
+	int x = 3; // Block -> x
+	int y = 0; // Block -> y
+	int block_state; // block rotate state
+	int block_number = 0;
+	int next_block_number = 0;
+	long point=0;
 
 }

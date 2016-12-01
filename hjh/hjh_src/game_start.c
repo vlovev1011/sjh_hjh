@@ -1,3 +1,4 @@
+#include "source.h"
 #include "variable.h"
 
 int game_start(void)
@@ -6,7 +7,7 @@ int game_start(void)
 	static struct itimerval timer;
 	time_t ptime;
 	struct tm *t;
-	FILE *fp = NULL
+	FILE *fp = NULL;
 
 	// init_tetris_table();
 

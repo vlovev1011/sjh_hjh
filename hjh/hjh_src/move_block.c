@@ -1,3 +1,4 @@
+#include "source.h"
 #include "variable.h"
 
 int move_block(int command)

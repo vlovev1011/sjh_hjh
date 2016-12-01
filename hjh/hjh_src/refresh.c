@@ -1,3 +1,4 @@
+#include "source.h"
 #include "variable.h"
 #include "getch.h"
 
@@ -13,11 +14,11 @@ int refresh(int signum)
 
 	srand((unsigned)time(NULL));
 	countrange=5;
-	if(firststat == 0)
+	if(firststart == 0)
 	{
 		block_number=rand()%7;
-		if(first == 0)
-			first++;
+		if(firststart == 0)
+			firststart++;
 	}
 
 	if(downcount == countrange-1)

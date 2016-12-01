@@ -21,6 +21,7 @@
 #define DOWN 2
 #define UP 3
 
+#define I_BLOCK 0
 #define T_BLOCK 1
 #define S_BLOCK 2
 #define Z_BLOCK 3
@@ -64,9 +65,3 @@ extern int next_block_number;
 extern long point;
 extern int countrange;
 extern int delete_line;
-int refresh(int signum);
-int collision(int command);
-void block_init(void);
-int game_start(void);
-int move_block(int command);
-int drop(void);
