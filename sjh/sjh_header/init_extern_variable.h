@@ -1,6 +1,6 @@
 #pragma once
 
-
+int game;
 char i_block[4][4][4];
  // ****
 char t_block[4][4][4];
