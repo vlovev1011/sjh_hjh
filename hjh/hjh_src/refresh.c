@@ -28,7 +28,7 @@ int refresh(int signum)
 	if(downcount == countrange-1)
 	{
 		point+=1;
-		move_blcok(DOWN);
+		move_block(DOWN);
 	}
 
 	if(speedcount == 499)
