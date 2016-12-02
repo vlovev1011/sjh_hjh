@@ -1,6 +1,8 @@
 #include "source.h"
 #include "variable.h"
 #include "getch.h"
+#include "display_tetris.h"
+#include "line_clear.h"
 
 int refresh(int signum)
 {
@@ -21,6 +23,9 @@ int refresh(int signum)
 			firststart++;
 	}
 	printf("\nScore: %ld || Speed: %d || Deleted Line: %d",point,countrange,delete_line);
+
+	display_tetris();
+	line_clear();
 
 	if(downcount == countrange-1)
 	{
