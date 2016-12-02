@@ -4,7 +4,6 @@
 #include "display_tetris.h"
 
 #include "variable.h"
-#include "getch.h"
 #include "source.h"
 #include "init_extern_variable.h"
 
