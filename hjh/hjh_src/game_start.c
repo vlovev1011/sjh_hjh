@@ -9,7 +9,7 @@ int game_start(void)
 	struct tm *t;
 	FILE *fp = NULL;
 
-	//init_tetris_table();
+	init_tetris_table();
 	if(game == GAME_START)
 	{
 		memset(&sa,0,sizeof(sa));

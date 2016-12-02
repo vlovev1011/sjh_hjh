@@ -49,6 +49,7 @@ int refresh(int signum)
 			speedcount=0;
 			countrange=5;
 			firststart=0;
+			game=GAME_END;
 		}
 	}
 	if(collision(DOWN))
