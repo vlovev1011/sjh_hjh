@@ -5,13 +5,13 @@ start_screen.o : start_screen.c
 	gcc -c start_screen.c -I../sjh_header
 
 init_tetris_table.o : init_tetris_table.c
-	gcc -c init_tetris_table.c -I../sjh_header -I/home/shinjaeho/sjh/sjh_hjh/hjh/hjh_header
+	gcc -c init_tetris_table.c -I../sjh_header -I../../hjh/hjh_header
 
 line_clear.o : line_clear.c 
-	gcc -c line_clear.c -I../sjh_header -I/home/shinjaeho/sjh/sjh_hjh/hjh/hjh_header
+	gcc -c line_clear.c -I../sjh_header -I../../hjh/hjh_header
 
 display_tetris.o : display_tetris.c
-	gcc -c display_tetris.c -I../sjh_header -I/home/shinjaeho/sjh/sjh_hjh/hjh/hjh_header
+	gcc -c display_tetris.c -I../sjh_header -I../../hjh/hjh_header
 
 
 clean :
