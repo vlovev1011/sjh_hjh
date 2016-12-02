@@ -29,7 +29,8 @@
 #define J_BLOCK 5
 #define O_BLOCK 6
 
-
+#define GAME_START 0
+#define GAME_END 1
 
 extern char i_block[4][4][4];
  // ****
@@ -65,3 +66,4 @@ extern int next_block_number;
 extern long point;
 extern int countrange;
 extern int delete_line;
+extern int game;

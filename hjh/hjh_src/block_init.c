@@ -3,7 +3,7 @@
 
 void block_init()
 {
-	char i_block[4][4][4] =
+	i_block[4][4][4] =
 	{
 	        1, 1, 1, 1,    0, 0, 0, 0,    0, 0, 0, 0,    0,0,0,0,
 
@@ -14,7 +14,7 @@ void block_init()
         	1, 0, 0, 0,   1, 0, 0, 0,    1, 0, 0, 0,    1,0,0,0
 
 	}; // ****
-	char t_block[4][4][4] =
+	t_block[4][4][4] =
 	{
 
         	1, 0, 0, 0,   1, 1, 0, 0,    1, 0, 0, 0,   0, 0, 0, 0,
@@ -27,7 +27,7 @@ void block_init()
 
 	}; // ***
 	   //  *
-	char s_block[4][4][4] =
+	s_block[4][4][4] =
 	{
 
 	        1, 0, 0, 0,    1, 1, 0, 0,    0, 1, 0, 0,   0, 0, 0, 0,
@@ -41,7 +41,7 @@ void block_init()
 	}; // *
 	   // **
 	   //  *
-	char z_block[4][4][4] =
+	z_block[4][4][4] =
 	{
 
         	0, 1, 0, 0,    1, 1, 0, 0,   1, 0, 0, 0,    0, 0,0, 0,
@@ -55,7 +55,7 @@ void block_init()
 	}; //  *
 	   // **
  	   // *
-	char l_block[4][4][4] =
+	l_block[4][4][4] =
 	{
 
 		1, 0, 0, 0,    1, 0, 0, 0,    1, 1, 0, 0,   0, 0, 0, 0,
@@ -69,7 +69,7 @@ void block_init()
 	}; // *
   	 // *
   	 // **
-	char j_block[4][4][4] =
+	j_block[4][4][4] =
 	{
 
         	0, 1, 0, 0,    0, 1, 0, 0,    1, 1, 0, 0,     0, 0, 0, 0,
@@ -83,7 +83,7 @@ void block_init()
 	}; //  *
 	   //  *
 	   // **
-	char o_block[4][4][4] =
+	o_block[4][4][4] =
 	{
 
 	        1, 1, 0, 0,    1, 1, 0, 0,    0, 0, 0, 0,    0, 0, 0, 0,
@@ -97,12 +97,13 @@ void block_init()
 	}; // **
 	   // **
 
-	char tetris_table[21][10];
-	int x = 3; // Block -> x
-	int y = 0; // Block -> y
-	int block_state; // block rotate state
-	int block_number = 0;
-	int next_block_number = 0;
-	long point=0;
+	tetris_table[21][10];
+	x = 3; // Block -> x
+	y = 0; // Block -> y
+	block_state=0; // block rotate state
+	block_number = 0;
+	next_block_number = 0;
+	point=0;
+	game = 1;
 
 }

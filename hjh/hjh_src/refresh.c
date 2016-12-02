@@ -7,7 +7,7 @@ int refresh(int signum)
 	static int downcount=0;
 	static int setcount=0;
 	static long speedcount=0;
-	//static int countrange=5;
+	static int countrange=5;
 	static int firststart=0;
 
 	char ch;
@@ -20,6 +20,7 @@ int refresh(int signum)
 		if(firststart == 0)
 			firststart++;
 	}
+	printf("\nScore: %ld || Speed: %d || Deleted Line: %d",point,countrange,delete_line);
 
 	if(downcount == countrange-1)
 	{
@@ -83,6 +84,7 @@ int refresh(int signum)
 				speedcount=0;
 				countrange=5;
 				firststart=0;
+				game = GAME_END;
 				break;
 		default : break;
 
