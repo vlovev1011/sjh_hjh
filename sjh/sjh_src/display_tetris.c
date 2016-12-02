@@ -4,6 +4,7 @@
 
 void display_tetris(void)
 {
+	system("clear");
 	int i, j;
      	char (*block_pointer)[4][4][4] = NULL;
 
