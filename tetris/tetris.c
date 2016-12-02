@@ -10,23 +10,24 @@
 
 void main()
 {
-	int GAME_START;
+	int menu;
+	menu=start_screen();
 
-	delete_line=0;
-	countrange=5;
-	init_tetris_table();
-
-	GAME_START = start_screen();
-
-
-	if(GAME_START==1)
+	while(1)
 	{
-		display_tetris();
-		line_clear();
+		if(menu == 1)
+		{
+			game = GAME_START;
+			game_start();
+		}
+		else if(menu == 2)
+		{
+			exit(0);
+		}
 	}
-	if(GAME_START == 2)
-	{
-		return;
-	}
+
+
+
+
 
 }
