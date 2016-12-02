@@ -1,8 +1,6 @@
 #include "source.h"
 #include "variable.h"
 #include "getch.h"
-#include "display_tetris.h"
-#include "line_clear.h"
 
 int refresh(int signum)
 {

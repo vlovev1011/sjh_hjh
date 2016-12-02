@@ -1,6 +1,5 @@
 #include "source.h"
 #include "variable.h"
-#include "init_tetris_table.h"
 
 int game_start(void)
 {
