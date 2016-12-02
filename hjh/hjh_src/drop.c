@@ -6,5 +6,5 @@ int drop(void)
 	while(!collision(DOWN))
 		move_block(DOWN);
 
-	return;
+	return 0;
 }

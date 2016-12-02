@@ -5,11 +5,11 @@ block_init.o : block_init.c
 drop.o : drop.c
 	gcc -c drop.c -I../hjh_header
 refresh.o : refresh.c
-	gcc -c refresh.c -I../hjh_header -I/home/shinjaeho/sjh/sjh_hjh/sjh/sjh_header
+	gcc -c refresh.c -I../hjh_header -L/../../sjh/sjh_src -lfuncs
 collision.o : collision.c
 	gcc -c collision.c -I../hjh_header
 game_start.o : game_start.c
-	gcc -c game_start.c -I../hjh_header -I/home/shinjaeho/sjh/sjh_hjh/sjh/sjh_header
+	gcc -c game_start.c -I../hjh_header -L/../../sjh/sjh_src -lfuncs
 move_block.o : move_block.c
 	gcc -c move_block.c -I../hjh_header
 
