@@ -429,7 +429,6 @@ int getch(void)
              return (error == 1 ? (int) ch : -1 );
 }
 
- /* 타이머에 콜백함수로 등록되어 계속 새로고침 하면서 호출되는 함수. 키입력 확인,  화면새로고침, 한줄완성검사등의 계속 상태가 변함을 확인해야 되는 함수를 호출한다 */ 
 int refresh(int signum)
 {
      static int downcount = 0;
@@ -448,12 +447,12 @@ int refresh(int signum)
              firststart++;
      }
 
-     printf("\n 득점 : %ld | 속도 : %d | 최고점수  : %d", point, countrange, best_point); 
+     printf("\n Score : %ld | Speed : %d | High Score  : %d", point, countrange, best_point); 
 
      display_tetris_table();
      check_one_line();
 
-     printf("\n 게임 정지 : P");
+     printf("\n Game Pause : P");
 
      if(downcount == countrange-1)
      {
@@ -529,41 +528,6 @@ int refresh(int signum)
      return 0;
 }
 
-int getch(void)
-{
-              char   ch;
-              int   error;
-              static struct termios Otty, Ntty;
-
-              fflush(stdout);
-              tcgetattr(0, &Otty);
-              Ntty = Otty;
-              Ntty.c_iflag  =  0;
-              Ntty.c_oflag  =  0;
-              Ntty.c_lflag &= ~ICANON;
- #if 1
-             Ntty.c_lflag &= ~ECHO;
- #else
-             Ntty.c_lflag |=  ECHO;
- #endif
-             Ntty.c_cc[VMIN]  = CCHAR;
-             Ntty.c_cc[VTIME] = CTIME;
-
- #if 1
- #define FLAG TCSAFLUSH
- #else
- #define FLAG TCSANOW
- #endif
-
-             if (0 == (error = tcsetattr(0, FLAG, &Ntty)))
-             {
-                        error  = read(0, &ch, 1 );
-                        error += tcsetattr(0, FLAG, &Otty);
-             }
-             return (error == 1 ? (int) ch : -1 );
-}
-
-
 int print_result(void)
 {
      FILE *fp = NULL;
@@ -577,8 +541,8 @@ int print_result(void)
      system("clear");
 
      printf("\n\t\t\t\tText Tetris");
-     printf("\n\t\t\t\t 게임 기록\n\n");
-     printf("\n\t\t이름\t\t점수\t   날짜\t\t 시간");
+     printf("\n\t\t\t\t Game History\n\n");
+     printf("\n\t\tName\t\tScore\t   Date\t\t Time");
 
      while(1)
      {
@@ -593,7 +557,7 @@ int print_result(void)
              }
      }
      fclose(fp);
-     printf("\n\n\t게임 메뉴로 돌아가기 : M");
+     printf("\n\n\tBack to the game : M");
      while(1)
      {
          ch = getch();
@@ -603,3 +567,170 @@ int print_result(void)
      return 0;
 }
 
+int search_result(void)
+{ 
+
+     FILE *fp = NULL; 
+     char name[30];
+     char ch; 
+     int find = 0;
+
+     fp = fopen("result", "rb"); 
+
+     if(fp == NULL) 
+         return 0;
+
+     system("clear"); 
+
+     printf("\n\n\t\tInput seach name  : "); 
+     scanf("%s%*c", name); 
+
+     printf("\n\t\t\t\tText Tetris"); 
+     printf("\n\t\t\t\t Game score\n\n"); 
+    printf("\n\t\tName\t\tScore\t   Date\t\t Time"); 
+
+     while(1) 
+     { 
+         fread(&temp_result, sizeof(struct result), 1, fp); 
+         if(!feof(fp)) 
+         { 
+             if(!strcmp(temp_result.name, name)) 
+             { 
+                find = 1; 
+                printf("\n\t========================================================"); 
+                printf("\n\t\t%s\n\t\t\t\t%ld\t%d. %d. %d.  |  %d : %d\n", temp_result.name, temp_result.point, temp_result.year, temp_result.month, temp_result.day, temp_result.hour, temp_result.min);
+             } 
+        } 
+        else 
+         { 
+             break; 
+         } 
+     } 
+
+     if(find == 0) 
+       printf("\n\n\n\t\tName is not exist"); 
+
+     printf("\n\n\n\t\tBack to menu : M"); 
+     while(1) 
+     { 
+         ch = getch(); 
+         if(ch == 77 || ch == 109)
+             break; 
+     } 
+
+    return 0;
+} 
+
+int drop(void)
+{ 
+     while(!collision_test(DOWN)) 
+         move_block(DOWN); 
+
+     return 0;
+} 
+
+int move_block(int command)
+{ 
+     int i, j; 
+     int newx, newy; 
+     int oldx, oldy; 
+     int old_block_state; 
+     char (*block_pointer)[4][4][4] = NULL; 
+
+     newx = x; 
+     newy = y; 
+
+     old_block_state = block_state; 
+
+     if(collision_test(command) == 0) 
+     { 
+         switch(command) 
+         { 
+             case    LEFT :    newx--; 
+                                         break;
+             case    RIGHT :    newx++; 
+                                         break;
+             case    DOWN :    newy++; 
+                                         break;
+             case ROTATE :    block_state++;
+                                         block_state %= 4;
+                                        break;
+         } 
+     } 
+     else 
+     { 
+         return 1;
+     } 
+
+     switch(block_number) 
+     { 
+         case I_BLOCK :    block_pointer = &i_block;
+                                       break;
+         case T_BLOCK :    block_pointer = &t_block;
+                                         break;
+         case S_BLOCK :  block_pointer = &s_block;
+                                         break;
+        case Z_BLOCK :     block_pointer = &z_block;
+                                         break;
+         case L_BLOCK :     block_pointer = &l_block;
+                                         break;
+         case J_BLOCK :     block_pointer = &j_block;
+                                        break;
+         case O_BLOCK :    block_pointer = &o_block;
+                                         break;
+     } 
+
+     for(i = 0, oldy = y ; i < 4 ; i++, oldy++)
+    { 
+         for(j = 0, oldx = x ; j < 4 ; j++, oldx++)
+         { 
+             if(oldx > 0 && oldx < 9 && oldy < 20 && oldy > 0)
+                 if((*block_pointer)[old_block_state][i][j] == 1) 
+                         tetris_table[oldy][oldx] = 0; 
+         } 
+     } 
+
+     x = newx; 
+     y = newy; 
+
+     for(i = 0, newy = y ; i < 4 ; i++, newy++)
+     { 
+         for(j = 0, newx = x ; j < 4 ; j++, newx++)
+         { 
+             if(newx > 0 && newx < 9 && newy < 20 && newy > 0)
+                 if((*block_pointer)[block_state][i][j] == 1) 
+                     tetris_table[newy][newx] = (*block_pointer)[block_state][i][j]; 
+         } 
+     } 
+     return 0;
+}
+
+int display_menu(void)
+{
+     int menu = 0;
+
+     while(1)
+     {
+         system("clear");
+         printf("\n\n\t\t\t\tText Tetris");
+         printf("\n\t\t\t============================");
+         printf("\n\t\t\t\tG A M E M E N U\t\n");
+         printf("\n\t\t\t============================");
+         printf("\n\t\t\t=\t1) Game Start\t       =");
+         printf("\n\t\t\t=\t2) Search History\t   =");
+         printf("\n\t\t\t=\t3) Print History \t   =");
+         printf("\n\t\t\t=\t4) Exit\t\t           =");
+         printf("\n\t\t\t============================");
+         printf("\n\t\t\t\t\t Correct : ");
+         scanf("%d",&menu);
+	 if(menu<1 || menu>4)
+         {
+             continue;
+         }
+         else
+         {
+             return menu;
+         }
+     }
+     return 0;
+ }
