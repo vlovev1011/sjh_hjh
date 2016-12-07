@@ -394,3 +394,212 @@ int check_one_line(void)
      }
      return 0;
 }
+
+int getch(void)
+{
+              char   ch;
+              int   error;
+              static struct termios Otty, Ntty;
+
+              fflush(stdout);
+              tcgetattr(0, &Otty);
+              Ntty = Otty;
+              Ntty.c_iflag  =  0;
+              Ntty.c_oflag  =  0;
+              Ntty.c_lflag &= ~ICANON;
+ #if 1
+             Ntty.c_lflag &= ~ECHO;
+ #else
+             Ntty.c_lflag |=  ECHO;
+ #endif
+             Ntty.c_cc[VMIN]  = CCHAR;
+             Ntty.c_cc[VTIME] = CTIME;
+
+ #if 1
+ #define FLAG TCSAFLUSH
+ #else
+ #define FLAG TCSANOW
+ #endif
+
+             if (0 == (error = tcsetattr(0, FLAG, &Ntty)))
+             {
+                        error  = read(0, &ch, 1 );
+                        error += tcsetattr(0, FLAG, &Otty);
+             }
+             return (error == 1 ? (int) ch : -1 );
+}
+
+ /* 타이머에 콜백함수로 등록되어 계속 새로고침 하면서 호출되는 함수. 키입력 확인,  화면새로고침, 한줄완성검사등의 계속 상태가 변함을 확인해야 되는 함수를 호출한다 */ 
+int refresh(int signum)
+{
+     static int downcount = 0;
+     static int setcount = 0;
+     static long speedcount = 0;
+     static int countrange = 5;
+     static int firststart = 0;
+     char ch;
+
+     srand((unsigned)time(NULL));
+
+     if(firststart == 0)
+     {
+         block_number= rand()%7;
+         if(firststart == 0)
+             firststart++;
+     }
+
+     printf("\n 득점 : %ld | 속도 : %d | 최고점수  : %d", point, countrange, best_point); 
+
+     display_tetris_table();
+     check_one_line();
+
+     printf("\n 게임 정지 : P");
+
+     if(downcount == countrange-1)
+     {
+         point += 1;
+         move_block(DOWN);
+     }
+
+     if(speedcount == 499)
+     {
+         if(countrange != 1)
+             countrange--;
+     }
+
+     downcount++;
+     downcount %= countrange;
+     speedcount++;
+     speedcount %= 500;
+     if(x == 3 && y == 0)
+     {
+         if(collision_test(LEFT) || collision_test(RIGHT) || collision_test(DOWN) || collision_test(ROTATE))
+         {
+             printf("\n Game End! \n");
+             downcount = 0;
+            setcount = 0;
+             speedcount = 0;
+             countrange = 5;
+             firststart = 0;
+             game = GAME_END;
+         }
+     }
+
+     if(collision_test(DOWN))
+     {
+         if(setcount == 9)
+         {
+             block_number= next_block_number;
+             next_block_number = rand()%7;
+             block_state = 0;
+             x = 3;
+             y = 0;
+         }
+         setcount++;
+         setcount %= 10;
+     }
+     ch = getch();
+     switch(ch)
+     {
+         case 74     :
+         case 106 :    move_block(LEFT);
+                               break;
+         case 76     :
+         case 108 :    move_block(RIGHT);
+                               break;
+         case 75     :
+         case 107 :    move_block(DOWN);
+                                 break;
+         case 73     :
+         case 105 :    move_block(ROTATE);
+                                 break;
+         case 65  :
+         case 97  :    drop();
+                                 break;
+          case 80  :
+          case 112 :    downcount = 0;
+                                  setcount = 0;
+                                  speedcount = 0;
+                                  countrange = 5;
+                                  firststart = 0;
+                                  game = GAME_END;
+                                  break;
+          default :     break;
+     }
+     return 0;
+}
+
+int getch(void)
+{
+              char   ch;
+              int   error;
+              static struct termios Otty, Ntty;
+
+              fflush(stdout);
+              tcgetattr(0, &Otty);
+              Ntty = Otty;
+              Ntty.c_iflag  =  0;
+              Ntty.c_oflag  =  0;
+              Ntty.c_lflag &= ~ICANON;
+ #if 1
+             Ntty.c_lflag &= ~ECHO;
+ #else
+             Ntty.c_lflag |=  ECHO;
+ #endif
+             Ntty.c_cc[VMIN]  = CCHAR;
+             Ntty.c_cc[VTIME] = CTIME;
+
+ #if 1
+ #define FLAG TCSAFLUSH
+ #else
+ #define FLAG TCSANOW
+ #endif
+
+             if (0 == (error = tcsetattr(0, FLAG, &Ntty)))
+             {
+                        error  = read(0, &ch, 1 );
+                        error += tcsetattr(0, FLAG, &Otty);
+             }
+             return (error == 1 ? (int) ch : -1 );
+}
+
+
+int print_result(void)
+{
+     FILE *fp = NULL;
+     char ch = 1 ;
+
+     fp = fopen("result", "rb");
+
+     if(fp == NULL)
+         return 0;
+
+     system("clear");
+
+     printf("\n\t\t\t\tText Tetris");
+     printf("\n\t\t\t\t 게임 기록\n\n");
+     printf("\n\t\t이름\t\t점수\t   날짜\t\t 시간");
+
+     while(1)
+     {
+             fread(&temp_result, sizeof(struct result), 1, fp);
+             if(!feof(fp))
+             {
+                 printf("\n\t========================================================");
+                 printf("\n\t\t%s\n\t\t\t\t%ld\t %d. %d. %d.  |  %d : %d\n", temp_result.name, temp_result.point, temp_result.year, temp_result.month, temp_result.day, temp_result.hour, temp_result.min);             }
+             else
+             {
+                 break;
+             }
+     }
+     fclose(fp);
+     printf("\n\n\t게임 메뉴로 돌아가기 : M");
+     while(1)
+     {
+         ch = getch();
+         if(ch == 77 || ch == 109)
+             break;
+     }
+     return 0;
+}
+
