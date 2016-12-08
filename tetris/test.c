@@ -716,7 +716,7 @@ int display_menu(void)
          printf("\n\t\t\t============================");
          printf("\n\t\t\t\tG A M E M E N U\t\n");
          printf("\n\t\t\t============================");
-         printf("\n\t\t\t=\t1) Game Start\t       =");
+         printf("\n\t\t\t=\t1) Game Start\t           =");
          printf("\n\t\t\t=\t2) Search History\t   =");
          printf("\n\t\t\t=\t3) Print History \t   =");
          printf("\n\t\t\t=\t4) Exit\t\t           =");
